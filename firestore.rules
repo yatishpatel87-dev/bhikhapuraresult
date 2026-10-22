@@ -1,0 +1,78 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Global Default-Deny Catch-All
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isValidUser(data) {
+      return data.uid is string && data.uid == request.auth.uid
+        && (!('schoolName' in data) || (data.schoolName is string && data.schoolName.size() <= 200))
+        && (!('academicYear' in data) || (data.academicYear is string && data.academicYear.size() <= 50));
+    }
+
+    function isValidStudent(data) {
+      return data.id is string && data.id.size() <= 128
+        && (data.standard is int || data.standard is number)
+        && data.division is string && data.division.size() <= 10
+        && (data.rollNumber is int || data.rollNumber is number)
+        && data.grNumber is string && data.grNumber.size() <= 50
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 200;
+    }
+
+    function isValidSubject(data) {
+      return data.id is string && data.id.size() <= 128
+        && data.name is string && data.name.size() <= 100
+        && data.standards is list;
+    }
+
+    function isValidResult(data) {
+      return data.studentId is string && data.studentId.size() <= 128
+        && (data.standard is int || data.standard is number);
+    }
+
+    // Isolated User namespace: users/{userId}
+    match /users/{userId} {
+      // Direct user document (profile & school settings)
+      allow get: if isOwner(userId);
+      allow list: if false;
+      allow create, update: if isOwner(userId) && isValidUser(request.resource.data);
+      allow delete: if isOwner(userId);
+
+      // Subcollection: Students
+      match /students/{studentId} {
+        allow get, list: if isOwner(userId);
+        allow create, update: if isOwner(userId) && isValidId(studentId) && isValidStudent(request.resource.data);
+        allow delete: if isOwner(userId) && isValidId(studentId);
+      }
+
+      // Subcollection: Subjects
+      match /subjects/{subjectId} {
+        allow get, list: if isOwner(userId);
+        allow create, update: if isOwner(userId) && isValidId(subjectId) && isValidSubject(request.resource.data);
+        allow delete: if isOwner(userId) && isValidId(subjectId);
+      }
+
+      // Subcollection: Results (Marks, Patrak A & B)
+      match /results/{studentId} {
+        allow get, list: if isOwner(userId);
+        allow create, update: if isOwner(userId) && isValidId(studentId) && isValidResult(request.resource.data);
+        allow delete: if isOwner(userId) && isValidId(studentId);
+      }
+    }
+  }
+}

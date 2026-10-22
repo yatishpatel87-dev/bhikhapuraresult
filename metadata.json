@@ -1,0 +1,6 @@
+{
+  "name": "શ્રી ભીખાપુરા પ્રાથમિક શાળા – પરિણામ વ્યવસ્થાપન",
+  "description": "ધોરણ 6 થી 8 ના વિદ્યાર્થીઓનું પરિણામ, ગુણ નોંધણી, પત્રક A, પત્રક B, મેરિટ લિસ્ટ અને પ્રિન્ટેબલ રિપોર્ટ કાર્ડ.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Anek Gujarati', 'Hind Vadodara', 'Noto Sans Gujarati', system-ui, sans-serif;
+    color: #1e293b;
+    background: linear-gradient(135deg, #f0fdf4 0%, #eff6ff 50%, #fdf4ff 100%);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, .font-heading {
+    font-family: 'Baloo Bhai 2', 'Anek Gujarati', sans-serif;
+  }
+
+  /* Make all numbers, inputs, and tabular digits bold across the application */
+  input[type="number"],
+  .font-mono,
+  .tabular-nums,
+  [data-numeric="true"],
+  .num-bold,
+  .digit-bold,
+  td:has(input[type="number"]),
+  .stat-number {
+    font-weight: 800 !important;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* 3D Pop Custom Effects */
+.card-3d {
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.08), 0 15px 25px -4px rgba(0, 0, 0, 0.1);
+}
+.card-3d:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 14px 0 rgba(0, 0, 0, 0.12), 0 25px 30px -5px rgba(0, 0, 0, 0.15);
+}
+
+.btn-3d {
+  position: relative;
+  transition: all 0.15s ease-in-out;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+}
+.btn-3d:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.25);
+}
+.btn-3d:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.25);
+}
+
+.badge-3d {
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.text-shadow-3d {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.glow-amber {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.45);
+}
+
+.glow-indigo {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.45);
+}
+
+.hologram-border {
+  background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+  background-size: 300% 300%;
+  animation: rainbowBorder 8s ease infinite;
+}
+
+@keyframes rainbowBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  html, body {
+    background-color: #ffffff !important;
+    background-image: none !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+    overflow: visible !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  #root, main {
+    overflow: visible !important;
+    height: auto !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .no-print, nav, header, footer, .print-hidden {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .page-break {
+    page-break-after: always;
+    break-after: page;
+  }
+  .report-card-container {
+    box-shadow: none !important;
+    border: 2px solid #000 !important;
+    margin: 0 auto 20px auto !important;
+    padding: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  table {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  /* Preserve bold numbers in print */
+  input[type="number"],
+  .font-mono,
+  .tabular-nums,
+  [data-numeric="true"],
+  .num-bold,
+  .digit-bold,
+  td, th {
+    font-weight: 800 !important;
+  }
+}
