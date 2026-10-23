@@ -1,12 +1,12 @@
 {
-  "projectId": "useful-fact-fwjkk",
-  "appId": "1:833230836080:web:6672045b1de7a35651bfb5",
-  "apiKey": "AIzaSyDinMlnzErRKW7LKpVduJ47-uCQ21JbBLk",
-  "authDomain": "useful-fact-fwjkk.firebaseapp.com",
+  "projectId": "bhikhapura-school-result",
+  "appId": "1:650747995604:web:b64e25dd8ff35248096241",
+  "apiKey": "AIzaSyAY4eXV-MCXxnydt3fNlZHVCqgyTZtmyuc",
+  "authDomain": "bhikhapura-school-result.firebaseapp.com",
   "firestoreDatabaseId": "ai-studio-91b80c73-b92b-42d3-a89c-484316e91ddf",
-  "storageBucket": "useful-fact-fwjkk.firebasestorage.app",
-  "messagingSenderId": "833230836080",
+  "storageBucket": "bhikhapura-school-result.firebasestorage.app",
+  "messagingSenderId": "650747995604",
   "measurementId": "",
-  "oAuthClientId": "833230836080-r0b059euur4bkev9erp2ei1hghkgem1j.apps.googleusercontent.com",
+  "oAuthClientId": "650747995604-7njbtegp1o1veee89vasmm681udhggpn.apps.googleusercontent.com",
   "recaptchaSiteKey": ""
 }
